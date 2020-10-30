@@ -52,9 +52,10 @@ process.on('SIGTERM', () => {
     14. Czym był Multer i multi-part form data
     15. Jak działa indeksowanie, że np. kombinacja user i tour może być unique. Czy mogę to użyć u siebie?
     16. UnhandledRejection i SIGTERM, co to było?
-    17. Czym właściwie są Promise
-    18. Przypomnieć sobie wykład o Embedded Documents i Reference  ?? To już chyba ogarnięte    
+    17. Czym właściwie są Promise   
     19. Przypomnieć sobie ten debugger co używałem.
     20. Co to jest branch w github?
+    21. Przypomnieć sobie funkcje find, findIndex i includes
+    22. Dokładnie poczytać o i++ i ++i i while loop
     
 */
