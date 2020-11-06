@@ -42,8 +42,6 @@ exports.manageReminders = async () => {
       path: 'user',
     });
 
-    console.log(reminders);
-
     console.log('Sending has been started...');
     for (let i = 0; i < reminders.length; i++) {
       // 1. Check if reminder is outdated, if true, delete it.
