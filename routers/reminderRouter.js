@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.use(authController.protect);
 
+router.get('/myReminders', reminderController.getMyReminders);
+
 // prettier-ignore
 router
   .route('/')

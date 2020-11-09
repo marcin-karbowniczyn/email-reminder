@@ -158,6 +158,19 @@ exports.getOneReminder = catchAsync(async (req, res, next) => {
   });
 });
 
+// Eventually this will be taken to userController mogule.
+exports.getMyReminders = catchAsync(async (req, res, next) => {
+  const reminders = await Reminder.find({ user: req.user.id });
+
+  res.status(200).json({
+    status: 'success',
+    results: reminders.length,
+    data: {
+      reminders,
+    },
+  });
+});
+
 exports.updateReminder = catchAsync(async (req, res, next) => {
   const updatedReminder = await Reminder.findByIdAndUpdate(
     req.params.id,
