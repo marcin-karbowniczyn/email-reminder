@@ -20,7 +20,10 @@ const handleDuplicateFieldsDB = (err) => {
     );
 
   const value = err.errmsg.match(/(["'])(?:(?=(\\?))\2.)*?\1/)[0];
-  return new AppError(`Duplicate field value: ${value}. Please use another value!`, 400);
+  return new AppError(
+    `Duplicate field value: ${value}. Please use another value!`,
+    400
+  );
 };
 
 const handleValidationError = (err) => {
@@ -69,15 +72,16 @@ module.exports = (err, req, res, next) => {
     sendErrorDev(err, req, res);
   } else if (process.env.NODE_ENV === 'production') {
     let error = { ...err };
-
+    error.message = err.message;
+    
     // Errors from JWT
     if (error.name === 'JsonWebTokenError') error = handleJWTError();
     if (error.name === 'TokenExpiredError') error = handleJWTExpiredError();
 
     // Mongoose errors
-    if (error.name === 'CastError') error = handleCastError(error);
+    if (error.message.startsWith('Cast')) error = handleCastError(error);
     if (error.code === 11000) error = handleDuplicateFieldsDB(error);
-    if (error.name === 'ValidationError') error = handleValidationError(error);
+    if (error.message.includes('validation failed')) error = handleValidationError(error);
 
     sendErrorProd(error, res);
   }
