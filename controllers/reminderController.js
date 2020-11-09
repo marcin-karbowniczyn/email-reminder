@@ -182,9 +182,6 @@ exports.updateReminder = catchAsync(async (req, res, next) => {
 exports.deleteReminder = catchAsync(async (req, res, next) => {
   await Reminder.findByIdAndDelete(req.params.id);
 
-  if (!reminder)
-    return next(new AppError('There is no remainder with this id.', 404));
-
   if (req.user)
     res.status(204).json({
       status: 'success',
