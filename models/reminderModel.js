@@ -13,7 +13,7 @@ const reminderSchema = new mongoose.Schema(
       trim: true,
       minlength: [3, `Reminder's title must contain at least 3 characters.`],
       maxlength: [
-        25,
+        50,
         `Reminder's title must containt maximum number of 25 characters.`,
       ],
       required: [true, 'Reminder must have a title.'],
