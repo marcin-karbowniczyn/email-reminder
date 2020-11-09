@@ -47,8 +47,13 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
+app.use('/', (req, res, next) => {
+  res.send('<h1>Email Remainder App for programming learning purposes.</h1>');
+});
+
 app.use('/api/reminders', remindersRouter);
 app.use('/api/users', userRouter);
+
 
 setInterval(() => {
   reminderController.manageReminders();
