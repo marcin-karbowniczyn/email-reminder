@@ -18,7 +18,7 @@ const createAndSendToken = (user, statusCode, res) => {
     ),
     httpOnly: true,
   };
-  // TO TRZEBA WŁĄCZYĆ!!!!!!
+  // TO TRZEBA WŁĄCZYĆ PO DODANIU DOMENY!!!!!!
   // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
   res.cookie('jwt', token, cookieOptions);
@@ -30,7 +30,6 @@ const createAndSendToken = (user, statusCode, res) => {
 
   res.status(statusCode).json({
     status: 'success',
-    token,
     data: {
       user,
     },

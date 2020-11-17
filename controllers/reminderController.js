@@ -158,10 +158,9 @@ exports.getOneReminder = catchAsync(async (req, res, next) => {
   });
 });
 
-// Eventually this will be taken to userController mogule.
+// Eventually this will be taken to userController module.
 exports.getMyReminders = catchAsync(async (req, res, next) => {
   const reminders = await Reminder.find({ user: req.user.id });
-
   res.status(200).json({
     status: 'success',
     results: reminders.length,

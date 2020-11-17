@@ -19,6 +19,7 @@ const app = express();
 // app.use(express.static(`${__dirname}/public`));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 // Implement CORS
 app.use(cors()); // Tak aktywujemy CORS, czyli udostępniami nasze API dla klientów z innych domen a nawet subdomen. To działa tylko dla GET i POST requests, czyli simple requests.
 
@@ -46,7 +47,6 @@ const limiter = rateLimit({
   message: 'Too many requests from this IP, please try again in an hour!',
 });
 app.use('/api', limiter);
-
 
 app.use('/api/reminders', remindersRouter);
 app.use('/api/users', userRouter);
