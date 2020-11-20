@@ -59,6 +59,7 @@ setInterval(() => {
   reminderController.manageReminders();
 }, 1000 * 60 * 60); // Co godzinę
 
+
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
   // Możemy w next() podać argument i Express będzie automatycznie wiedział, że ten argument to error. Zawsze jak podamy jakiś argument w next(), to Express weźmie go za error. Po tym Express pominie inne middlewares na stacku i przejdzie od razu do naszego global error middleware, który jest zdefiniowany poniżej.

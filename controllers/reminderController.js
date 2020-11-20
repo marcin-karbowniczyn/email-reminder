@@ -23,7 +23,7 @@ const checkPermanentAndChangeYear = async (reminder) => {
   }
 };
 
-const sendEmailWithReminder = async (reminder, i, typeOfReminder) => {
+const sendAndUpdateReminder = async (reminder, i, typeOfReminder) => {
   try {
     console.log(`Reminder ${i} is now being processed.`);
     await new Email(reminder).sendEmail();
@@ -32,7 +32,7 @@ const sendEmailWithReminder = async (reminder, i, typeOfReminder) => {
     reminder.sentCheck[`${typeOfReminder}`] = true;
     await reminder.save({ validateBeforeSave: false });
   } catch (err) {
-    console.log(err);
+    console.log('Error while sending or updating reminder', err);
   }
 };
 
@@ -56,7 +56,7 @@ exports.manageReminders = async () => {
         reminders[i].daysUntilReminder > 7 &&
         !reminders[i].sentCheck.month
       ) {
-        await sendEmailWithReminder(reminders[i], i, 'month');
+        await sendAndUpdateReminder(reminders[i], i, 'month');
         continue;
         // 2b. Send reminder 1 week ahead.
       } else if (
@@ -64,7 +64,7 @@ exports.manageReminders = async () => {
         reminders[i].daysUntilReminder > 3 &&
         !reminders[i].sentCheck.week
       ) {
-        await sendEmailWithReminder(reminders[i], i, 'week');
+        await sendAndUpdateReminder(reminders[i], i, 'week');
         continue;
         // 2c. Send reminder three days ahead.
       } else if (
@@ -72,26 +72,26 @@ exports.manageReminders = async () => {
         reminders[i].daysUntilReminder > 1 &&
         !reminders[i].sentCheck.threeDays
       ) {
-        await sendEmailWithReminder(reminders[i], i, 'threeDays');
+        await sendAndUpdateReminder(reminders[i], i, 'threeDays');
         continue;
         // 2d. Send Reminder one day ahead.
       } else if (
         reminders[i].daysUntilReminder === 1 &&
         !reminders[i].sentCheck.oneDay
       ) {
-        await sendEmailWithReminder(reminders[i], i, 'oneDay');
+        await sendAndUpdateReminder(reminders[i], i, 'oneDay');
         continue;
         // 2e. Send Reminder on a reminder date.
       } else if (
         !reminders[i].daysUntilReminder &&
         !reminders[i].sentCheck.today
       ) {
-        await sendEmailWithReminder(reminders[i], i, 'today');
+        await sendAndUpdateReminder(reminders[i], i, 'today');
         await checkPermanentAndChangeYear(reminders[i]);
         continue;
       }
     }
-    console.log('Sending has beed completed.');
+    console.log('Sending completed.');
   } catch (err) {
     console.log(err);
   }
