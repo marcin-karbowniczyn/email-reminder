@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
@@ -13,12 +15,13 @@ const globalErrorHandler = require('./controllers/errorController');
 const remindersRouter = require('./routers/reminderRouter');
 const userRouter = require('./routers/userRouter');
 const AppError = require('./utils/appError');
+const e = require('express');
 
 const app = express();
-// Serving static files
-// app.use(express.static(`${__dirname}/public`));
-app.use(express.static(path.join(__dirname, 'public')));
 
+// Serving static files
+// Express looks for index.js by default.
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Implement CORS
 app.use(cors()); // Tak aktywujemy CORS, czyli udostępniami nasze API dla klientów z innych domen a nawet subdomen. To działa tylko dla GET i POST requests, czyli simple requests.
@@ -58,7 +61,7 @@ app.use('/', (req, res, next) => {
 setInterval(() => {
   reminderController.manageReminders();
 }, 1000 * 60 * 60); // Co godzinę
-
+// reminderController.manageReminders();
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
