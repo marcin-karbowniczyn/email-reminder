@@ -57,11 +57,13 @@ app.use('/', (req, res, next) => {
   res.send('<h1>Email Remainder App for programming learning purposes.</h1>');
 });
 
+// Initial delivery after app has been started
 reminderController.manageReminders();
+
+// Next remainders are being sent every hour
 setInterval(() => {
   reminderController.manageReminders();
 }, 1000 * 60 * 60); // Co godzinę
-// reminderController.manageReminders();
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

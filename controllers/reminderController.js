@@ -97,7 +97,7 @@ exports.manageReminders = async () => {
         continue;
       }
     }
-    console.log('Sending completed.');
+    console.log(`Sending completed at ${new Date()}.`);
   } catch (err) {
     console.log(err);
   }
