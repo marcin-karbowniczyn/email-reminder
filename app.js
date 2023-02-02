@@ -18,7 +18,7 @@ const AppError = require('./utils/appError');
 
 const app = express();
 
-console.log(process.env.NODE_ENV);
+console.log(process.env.NODE_ENV, process.env.SENDGRID_USERNAME);
 
 // Serving static files
 // Express looks for index.js by default.
