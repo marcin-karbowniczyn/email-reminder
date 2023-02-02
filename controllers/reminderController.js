@@ -30,7 +30,7 @@ const checkPermanentAndChangeYear = async (reminder) => {
 
 const sendAndUpdateReminder = async (reminder, i, typeOfReminder) => {
   try {
-    console.log(`Reminder ${i} is now being processed.`);
+    console.log(`Reminder ${reminder.id} is now being processed.`);
     await new Email(reminder).sendEmail();
 
     // 2. Mark a reminder as sent

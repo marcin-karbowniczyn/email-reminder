@@ -57,6 +57,7 @@ app.use('/', (req, res, next) => {
   res.send('<h1>Email Remainder App for programming learning purposes.</h1>');
 });
 
+reminderController.manageReminders();
 setInterval(() => {
   reminderController.manageReminders();
 }, 1000 * 60 * 60); // Co godzinę
