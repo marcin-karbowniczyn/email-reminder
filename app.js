@@ -18,6 +18,8 @@ const AppError = require('./utils/appError');
 
 const app = express();
 
+console.log(process.env.NODE_ENV);
+
 // Serving static files
 // Express looks for index.js by default.
 app.use(express.static(path.join(__dirname, 'public')));
